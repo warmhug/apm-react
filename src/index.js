@@ -4,6 +4,8 @@ import { BrowserRouter } from "react-router-dom";
 import * as Sentry from "@sentry/react";
 import { BrowserTracing } from "@sentry/tracing";
 import { datadogRum } from '@datadog/browser-rum';
+import { datadogLogs } from "@datadog/browser-logs";
+
 
 import './index.css';
 import App from './App';
@@ -19,21 +21,27 @@ Sentry.init({
   tracesSampleRate: 1.0,
 });
 
+datadogLogs.init({
+  clientToken: "pub80eca143cf546b8d64b9b5c240174abe",
+  site: "datadoghq.com",
+  forwardErrorsToLogs: true,
+  sampleRate: 100,
+});
 datadogRum.init({
     applicationId: '21b97a29-ab63-4515-9afa-87cda2db56c8',
     clientToken: 'pub80eca143cf546b8d64b9b5c240174abe',
     site: 'datadoghq.com',
     service:'test',
     env:'prod',
-    // Specify a version number to identify the deployed version of your application in Datadog 
+    // Specify a version number to identify the deployed version of your application in Datadog
     // version: '1.0.0',
     sampleRate: 100,
     premiumSampleRate: 100,
     trackInteractions: true,
     defaultPrivacyLevel:'mask-user-input'
 });
-
 datadogRum.startSessionReplayRecording();
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@datadog/browser-logs": "^4.19.1",
     "@datadog/browser-rum": "^4.14.0",
     "@sentry/react": "^7.5.0",
     "@sentry/tracing": "^7.5.0",
